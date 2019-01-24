@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.florian_wagner.multipdfsearch.gui.SearchResultWindow;
 import org.florian_wagner.multipdfsearch.gui.StarterWindow;
 
 import java.io.File;
@@ -16,6 +17,8 @@ public class StarterWindowController implements Initializable {
 
     @FXML private Button checkbutton;
     @FXML private TextField pathfield;
+    @FXML private Button searchbutton;
+    @FXML private TextField searchfield;
 
     private ArrayList<File> pdfClipboard;
 
@@ -40,6 +43,20 @@ public class StarterWindowController implements Initializable {
                 if(file.getAbsolutePath().endsWith(".pdf")) pdfClipboard.add(file);
             }
             StarterWindow.getInstance().showStep2(pdfClipboard.size());
+        }
+    }
+
+    public void handleSearchButton()
+    {
+        Stage stage = (Stage) checkbutton.getScene().getWindow();
+        String searchText = searchfield.getText();
+        if(pdfClipboard != null)
+        {
+            try {
+                new SearchResultWindow().start(stage,pdfClipboard,searchText);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }
