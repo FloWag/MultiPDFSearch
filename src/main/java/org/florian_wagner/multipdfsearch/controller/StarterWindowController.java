@@ -27,6 +27,9 @@ public class StarterWindowController implements Initializable {
 
     }
 
+    /**
+     * Executed by the JavaFX Engine
+     */
     public void handleCheckButton()
     {
         String path = pathfield.getText();
@@ -46,6 +49,9 @@ public class StarterWindowController implements Initializable {
         }
     }
 
+    /**
+     * Executed by the JavaFX Engine
+     */
     public void handleSearchButton()
     {
         Stage stage = (Stage) checkbutton.getScene().getWindow();

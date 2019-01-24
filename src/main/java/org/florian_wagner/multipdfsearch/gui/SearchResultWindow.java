@@ -12,7 +12,6 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import org.apache.pdfbox.io.RandomAccessFile;
-import org.apache.pdfbox.io.RandomAccessRead;
 import org.apache.pdfbox.pdfparser.PDFParser;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
@@ -28,6 +27,13 @@ public class SearchResultWindow {
     private ListView listView;
     private ProgressBar progressBar;
 
+    /**
+     * Replaces the current window with a searchresult window and starts a search.
+     * @param primaryStage the primaryStage which has to be overwritten
+     * @param pdfClipboard collection of PDFs to search through
+     * @param searchText the string to search for
+     * @throws Exception never mind
+     */
     public void start(Stage primaryStage, ArrayList<File> pdfClipboard, String searchText) throws Exception {
         URL xml = getClass().getResource("/org/florian_wagner/multipdfsearch/resources/searchWindow.fxml");
         FXMLLoader loader = new FXMLLoader(xml);
@@ -68,6 +74,11 @@ public class SearchResultWindow {
 
     }
 
+    /**
+     * starts the search thread
+     * @param pdfClipboard collection of PDFs to search through
+     * @param searchText the string to search for
+     */
     private void startSearchThread(ArrayList<File> pdfClipboard, String searchText)
     {
         for(int i = 0; i < pdfClipboard.size(); i++)
@@ -90,6 +101,13 @@ public class SearchResultWindow {
 
     }
 
+    /**
+     * Checks if a PDF file contains a specific string
+     * @param pdfFile
+     * @param searchString
+     * @return true if the pdf contains the string
+     * @throws IOException
+     */
     private boolean stringExistsInPDF(File pdfFile, String searchString) throws IOException {
 
         PDFParser parser = new PDFParser(new RandomAccessFile(pdfFile,"r"));
@@ -104,6 +122,12 @@ public class SearchResultWindow {
         return found;
     }
 
+    /**
+     * calculates percentage of progressBar based on the current search progress
+     * @param current
+     * @param max
+     * @return
+     */
     private double calculatePercentage(int current, int max)
     {
         return (double)current / (double)max;

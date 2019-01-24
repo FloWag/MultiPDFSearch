@@ -22,6 +22,11 @@ public class StarterWindow extends Application {
     private Button searchButton;
     private TextField searchField;
 
+    /**
+     * starts the inital settings window - executed by the JavaFX Engine
+     * @param primaryStage
+     * @throws Exception
+     */
     public void start(Stage primaryStage) throws Exception {
         instance = this;
         URL xml = getClass().getResource("/org/florian_wagner/multipdfsearch/resources/starterWindow.fxml");
@@ -47,6 +52,10 @@ public class StarterWindow extends Application {
 
     }
 
+    /**
+     * makes a few more options visible
+     * @param pdfAmount the amount of pdfs, we found in provious steps
+     */
     public void showStep2(int pdfAmount)
     {
         if(pdfAmount == 0)
@@ -62,6 +71,10 @@ public class StarterWindow extends Application {
         }
     }
 
+    /**
+     * hides step 2 options
+     * @param scene
+     */
     private void hideStep2Items(Scene scene)
     {
         searchLabel = (Text)scene.lookup("#searchlabel");
@@ -73,6 +86,10 @@ public class StarterWindow extends Application {
         searchButton.setVisible(false);
     }
 
+    /**
+     * Singleton
+     * @return
+     */
     public static StarterWindow getInstance()
     {
         return instance;
