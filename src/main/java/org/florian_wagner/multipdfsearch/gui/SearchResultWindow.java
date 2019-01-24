@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -26,6 +27,7 @@ public class SearchResultWindow {
     private Text statusLabel;
     private ListView listView;
     private ProgressBar progressBar;
+    private ImageView loadingGif;
 
     /**
      * Replaces the current window with a searchresult window and starts a search.
@@ -63,6 +65,7 @@ public class SearchResultWindow {
         statusLabel = (Text)scene.lookup("#statusLabel");
         listView = (ListView)scene.lookup("#listView");
         progressBar = (ProgressBar) scene.lookup("#progressBar");
+        loadingGif = (ImageView) scene.lookup("#loadingGif");
         statusLabel.setText("Suche nach Begriff \"" + searchText + "\"");
 
         new Thread(new Runnable() {
@@ -98,6 +101,7 @@ public class SearchResultWindow {
         }
         progressBar.setProgress(1d);
         statusLabel.setText("Suche abgeschlossen!");
+        loadingGif.setVisible(false);
 
     }
 
